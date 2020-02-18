@@ -1,19 +1,30 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {BrowserRouter as Router, Switch, Route, useParams} from 'react-router-dom';
+import {BrowserRouter as Router, Switch, Route, useParams, useHistory} from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import ApolloClient from 'apollo-boost';
 import {ApolloProvider} from 'react-apollo';
-
 import {Container, Notification, Columns, Column, Content, Image, Title, Box, Progress, Button, Footer} from 'bloomer';
 import 'bulma/css/bulma.css';
+import SimpleReactLightbox from "simple-react-lightbox";
+import { SRLWrapper } from "simple-react-lightbox";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faEnvelope} from '@fortawesome/free-solid-svg-icons';
 import {Query} from "@apollo/react-components";
+
 import {GET_PROJECTS} from "./qgl/getProjects";
 const history = createBrowserHistory();
 
-const client = new ApolloClient({uri: 'http://localhost:3307/graphql'});
+const client = new ApolloClient({uri: 'https://piotr.cf:3307/graphql'});
+const SRLoptions = {
+    overlayColor: "#64cdfb",
+    transitionTimingFunction: "ease",
+    slideTransitionSpeed: 1000,
+    buttonsIconPadding: "2px",
+    buttonsIconColor: "rgba(25, 136, 124)",
+    enablePanzoom: false,
+    hideControlsAfter: 3000
+};
 
 class ProjectInfo extends React.Component{
     render(){
@@ -21,7 +32,7 @@ class ProjectInfo extends React.Component{
             <Notification isColor='warning'>
                 <Title isSize={3}>{this.props.value.title}</Title>
                 <p>{this.props.value.description}</p>
-                <Button style={{marginTop: 10}} isLink isSize='small' isColor='info' href={'project/' + this.props.value.id}>show me the details</Button>
+                <ButtonHistory style={{marginTop: 10}} path={'project/' + this.props.value.id} text='show me the details' />
             </Notification>
         );
     }
@@ -47,14 +58,13 @@ class ProjectsList extends React.Component {
 
 class Home extends React.Component {
     render() {
-        console.log(this.props.history);
         return (
             <Container isFluid style={{marginTop: 30}}>
                 <Columns isCentered>
                     <Column isSize='1/3'>
                         <Notification>
                             <Container style={{marginTop: 10}}>
-                                <Image isSize="96x96" src="http://localhost:3000/teemo.png"/>
+                                <Image isSize="96x96" src={ process.env.PUBLIC_URL +"/teemo.png"}/>
                                 <Content>
                                     <h1>Piotr Z.</h1>
                                     Hi!
@@ -106,8 +116,8 @@ function OnlyProject(){
     if(isNaN(slug)){
         project = <Notification isColor='danger'>
                         <Title isSize={3}>Wrong project ID</Title>
-                       <p>sdfsdfdf</p>
-                        <Button isLink isSize='small' isColor='info' href={'/'}>Back to all projects</Button>
+                       <p>;c</p>
+                        <ButtonHistory back={true} path='/' text='Back to all projects' />
                     </Notification>
     }else{
         project = <Notification isColor='light'>
@@ -120,6 +130,7 @@ function OnlyProject(){
                         let technologies;
                         let images;
                         let urlTo;
+                        let otherInfo;
                         if(current[0].projects_technologies.length){
                             const technologiesList = current[0].projects_technologies.map((project, key) => {
                                 return (
@@ -139,22 +150,33 @@ function OnlyProject(){
                         if(current[0].projects_images.length){
                             const imagesList = current[0].projects_images.map((project, key) => {
                                 return (
-                                    <li className="list-item" key={key}>
-                                        <a href={'http://localhost:3000/info/' + slug + '/' + project.image_filename}>
-                                            <Image src={'http://localhost:3000/info/' + slug + '/' + project.image_filename} />
-                                        </a>
-                                    </li>
+                                        <li className="list-item" key={key}>
+                                            <a href={process.env.PUBLIC_URL + '/info/' + slug + '/' + project.image_filename}>
+                                                <Image src={process.env.PUBLIC_URL + '/info/' + slug + '/' + project.image_filename} />
+                                            </a>
+                                        </li>
                                 )
                             });
 
                             images =
                                 <Notification isColor='warning'>
                                     <Title isSize={4}>Example images</Title>
-                                    {imagesList}
+                                        <SRLWrapper options={SRLoptions}>
+                                            {imagesList}
+                                        </SRLWrapper>
                                 </Notification>;
                         }
+
+                        if(current[0].other_info){
+                            otherInfo =
+                                <Notification style={{marginTop: 20}} isColor='warning'>
+                                    <Title isSize={4}>Other info</Title>
+                                    <p>{current[0].other_info}</p>
+                                </Notification>;
+                        }
+
                         if(current[0].url){
-                            urlTo = <Button isLink isSize='small' isColor='info' href={current[0].url}>Show project</Button>
+                            urlTo = <Button isLink isSize='small' isColor='info' href={current[0].url}>Go to project site</Button>
                         }
                         return(
                             <div>
@@ -162,6 +184,7 @@ function OnlyProject(){
                                 <p>{current[0].description}</p>
                                 {technologies}
                                 {images}
+                                {otherInfo}
                                 {urlTo}
                             </div>
                         )
@@ -169,14 +192,14 @@ function OnlyProject(){
                         return(
                             <div>
                                 <Title isSize={3}>Wrong project ID</Title>
-                                <p>sdfsdfdf</p>
+                                <p>Project with this ID does not exist</p>
                             </div>
                             )
                     }
                 }}
             </Query>
             <br />
-            <Button isLink isSize='small' isColor='info' href={'/'}>Back to all projects</Button>
+            <ButtonHistory back={true} path='/' text='Back to all projects' />
         </Notification>
     }
     return (
@@ -186,6 +209,24 @@ function OnlyProject(){
                 {project}
             </Box>
         </Container>
+    );
+}
+
+function ButtonHistory(props) {
+    let history = useHistory();
+
+    function handleClick() {
+        if(props.back){
+            history.goBack();
+        }else{
+            history.push(props.path);
+        }
+    }
+
+    return (
+        <Button isSize='small' isColor='info' onClick={handleClick}>
+            {props.text}
+        </Button>
     );
 }
 
@@ -201,30 +242,32 @@ class App extends React.Component{
     render() {
         return(
             <Router hitory={history}>
-                <Switch>
-                    <Route path="/project/:slug">
-                        <OnlyProject />
-                    </Route>
-                    <Route exact path="/">
-                        <Home />
-                    </Route>
-                    <Route>
-                        <Page404 />
-                    </Route>
-                </Switch>
-                <Footer id='footer' style={{marginTop: 30}}>
-                    <Container>
-                        <Content>
-                            <Columns>
-                                <Column>
-                                    <p>
-                                        Made by <a href="#">Piotr</a> ;D
-                                    </p>
-                                </Column>
-                            </Columns>
-                        </Content>
-                    </Container>
-                </Footer>
+                <SimpleReactLightbox>
+                    <Switch>
+                        <Route path="/project/:slug">
+                            <OnlyProject />
+                        </Route>
+                        <Route exact path="/">
+                            <Home />
+                        </Route>
+                        <Route>
+                            <Page404 />
+                        </Route>
+                    </Switch>
+                    <Footer id='footer' style={{marginTop: 30}}>
+                        <Container>
+                            <Content>
+                                <Columns>
+                                    <Column>
+                                        <p>
+                                            Made by <a href="#">Piotr</a> ;D
+                                        </p>
+                                    </Column>
+                                </Columns>
+                            </Content>
+                        </Container>
+                    </Footer>
+                </SimpleReactLightbox>
             </Router>
         );
     }
