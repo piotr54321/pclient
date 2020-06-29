@@ -14,7 +14,7 @@ class Home extends React.Component {
                     <Column isSize='1/3'>
                         <Notification>
                             <Container style={{marginTop: 10}}>
-                                <Image isSize="96x96" src={ process.env.PUBLIC_URL +"/teemo.png" }/>
+                                <Image isSize="96x96" src={ process.env.PUBLIC_URL +"/HPGoPPl.png" }/>
                                 <Content>
                                     <h1>Piotr Z.</h1>
                                     Hi!

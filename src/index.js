@@ -10,8 +10,9 @@ import SimpleReactLightbox from "simple-react-lightbox";
 import Home from "./components/Home";
 import OnlyProject from "./components/OnlyProject";
 import Page404 from "./components/Page404";
-const history = createBrowserHistory();
+import * as serviceWorker from './serviceWorker';
 
+const history = createBrowserHistory();
 const client = new ApolloClient({uri: 'https://piotr.cf:3307/graphql'});
 
 class App extends React.Component{
@@ -44,3 +45,4 @@ class App extends React.Component{
 }
 
 ReactDOM.render(<ApolloProvider client={client}><App/></ApolloProvider>, document.getElementById('root'));
+serviceWorker.register();

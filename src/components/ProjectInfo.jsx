@@ -8,7 +8,7 @@ class ProjectInfo extends React.Component{
             <Notification isColor='warning'>
                 <Title isSize={3}>{this.props.value.title}</Title>
                 <p>{this.props.value.description}</p>
-                <ButtonHistory style={{marginTop: 10}} path={'project/' + this.props.value.id} text='show me the details' />
+                <ButtonHistory style={{marginTop: 10}} path={'project/' + this.props.value.id} isColor='info' text='show me the details' />
             </Notification>
         );
     }

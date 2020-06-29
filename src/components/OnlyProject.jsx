@@ -17,7 +17,7 @@ function OnlyProject(){
         project = <Notification isColor='danger'>
             <Title isSize={3}>Wrong project ID</Title>
             <p>;c</p>
-            <ButtonHistory back={true} path='/' text='Back to all projects' />
+            <ButtonHistory back={true} path='/' isColor='info' text='Back to all projects' />
         </Notification>
     }else{
         project = <Notification isColor='light'>
@@ -30,7 +30,7 @@ function OnlyProject(){
                     if(current.length){
                         let urlTo;
                         if(current[0].url){
-                            urlTo = <Button style={{marginTop: 30}} isLink isSize='medium' isColor='info' href={ current[0].url }>Go to project site</Button>
+                            urlTo = <Button style={{marginTop: 30}} isLink isSize='medium' isColor='info' href={ current[0].url } target="_blank">Go to project site</Button>
                         }
 
                         return(
@@ -54,7 +54,7 @@ function OnlyProject(){
                 }}
             </Query>
             <br />
-            <ButtonHistory back="true" path='/' text='Back to all projects' />
+            <ButtonHistory back="true" path='/' isColor='info' text='Back to all projects' />
         </Notification>
     }
     return (
@@ -62,7 +62,7 @@ function OnlyProject(){
             <Box>
                 <Breadcrumb>
                     <ul>
-                        <BreadcrumbItem><a href="/"><Title isSize={1}><FontAwesomeIcon icon={ faHome } /></Title></a></BreadcrumbItem>
+                        <BreadcrumbItem><ButtonHistory isColor='white' path='/' isSize='large' isInverted={false} text={<FontAwesomeIcon icon={ faHome } />} /></BreadcrumbItem>
                         <BreadcrumbItem isActive><Title isSize={1}>Project file</Title></BreadcrumbItem>
                     </ul>
                 </Breadcrumb>

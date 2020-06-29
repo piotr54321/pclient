@@ -16,7 +16,7 @@ function ButtonHistory(props) {
     }
 
     return (
-        <Button {...props} isColor='info' onClick={handleClick}>
+        <Button {...props} onClick={handleClick}>
             {props.text}
         </Button>
     );
