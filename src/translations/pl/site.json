@@ -1,0 +1,33 @@
+{
+  "main": {
+    "created_by": "Stworzone przez Piotr.cf :D"
+  },
+  "home": {
+    "hello": "Cześć!",
+    "name": "Piotr Z.",
+    "page_prepared_for": "Strona przygotowana na potrzeby projektu dzięki któremu można zobaczyć inne moje projekty",
+    "date": "1 luty 2020",
+    "contact_me": "Skontaktuj się ze mną!",
+    "email": "piotrekzet97@gmail.com",
+    "projects": "Projekty",
+    "load_error": "Nie mogę załadować projektów"
+  },
+  "project_page": {
+    "wrong_id": "Błędne (ID) projektu",
+    "dont_exist": "Projekt z podanym ID nie istnieje",
+    "back_to": "Cofnij się do wszystkich projektów",
+    "load_error": "Nie mogę się załadować",
+    "project_site": "Przejdź do strony projektu",
+    "project_file": "Karta projektu"
+  },
+  "404_page": {
+    "title": "404",
+    "error_text": "Chciałem coś załadować ale sam nie wiem co się stało :C -> wróć do strony głównej :D"
+  },
+  "project_info": {
+    "show_details": "Pokaż szczegóły"
+  },
+  "other_info": {
+    "other_info": "Inne informacje"
+  }
+}

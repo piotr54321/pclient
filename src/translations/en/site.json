@@ -1,0 +1,33 @@
+{
+  "main": {
+    "created_by": "Created by Piotr.cf: D"
+  },
+  "home": {
+    "hello": "Hello!",
+    "name": "Piotr Z.",
+    "page_prepared_for": "Website prepared for the project, thanks to which you can see my other projects",
+    "date": "1 February 2020",
+    "contact_me": "Contact me!",
+    "email": "piotrekzet97@gmail.com",
+    "projects": "Projects",
+    "load_error": "I cannot load projects"
+  },
+  "project_page": {
+    "wrong_id": "Invalid (ID) of the project",
+    "dont_exist": "The project with the given ID does not exist",
+    "back_to": "Go back to all projects",
+    "load_error": "I am unable to load",
+    "project_site": "Go to the project page",
+    "project_file": "Project - in short"
+  },
+  "404_page": {
+    "title": "404",
+    "error_text": "I wanted to load something but I don't know what happened: C -> go back to the main page: D"
+  },
+  "project_info": {
+    "show_details": "Show me details"
+  },
+  "other_info": {
+    "other_info": "Other informations"
+  }
+}

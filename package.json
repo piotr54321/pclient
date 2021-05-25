@@ -14,9 +14,11 @@
     "bulma": "latest",
     "graphql": "latest",
     "history": "latest",
+    "i18next": "^20.3.0",
     "react": "latest",
     "react-apollo": "latest",
     "react-dom": "latest",
+    "react-i18next": "^11.9.0",
     "react-router-dom": "latest",
     "react-scripts": "latest",
     "simple-react-lightbox": "latest"

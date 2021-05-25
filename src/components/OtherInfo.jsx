@@ -1,5 +1,6 @@
 import React from "react";
 import {Notification, Title} from "bloomer";
+import {Trans, withTranslation} from "react-i18next";
 
 class OtherInfo extends React.Component{
     render() {
@@ -8,7 +9,7 @@ class OtherInfo extends React.Component{
         if(this.props.other_info){
             otherInfo =
                 <Notification style={{marginTop: 20}} isColor='warning'>
-                    <Title isSize={4}>Other info</Title>
+                    <Title isSize={4}><Trans i18nKey="other_info.other_info"/></Title>
                     <p>{this.props.other_info}</p>
                 </Notification>;
         }
@@ -16,4 +17,4 @@ class OtherInfo extends React.Component{
     }
 }
 
-export default OtherInfo;
+export default withTranslation()(OtherInfo);
