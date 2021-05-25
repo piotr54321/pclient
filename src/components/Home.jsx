@@ -6,17 +6,20 @@ import {Query} from "@apollo/react-components";
 import {GET_PROJECTS} from "../qgl/getProjects";
 import ProjectsList from "./ProjectsList";
 import {withTranslation, Trans} from "react-i18next";
-import LanguageChanger from "./LanguageChanger";
 
 class Home extends React.Component {
     render() {
+        let images = [
+            'villager.png',
+            'teemo.png'
+        ]
         return (
             <Container isFluid style={{marginTop: 30}}>
                 <Columns isCentered>
                     <Column isSize='1/3'>
                         <Notification>
                             <Container style={{marginTop: 10}}>
-                                <Image isSize="96x96" src={ process.env.PUBLIC_URL +"/HPGoPPl.png" }/>
+                                <Image isSize="96x96" src={`${process.env.PUBLIC_URL}/avatar/${images[Math.floor(Math.random() * images.length)]}`}/>
                                 <Content>
                                     <h1><Trans i18nKey="home.name" /></h1>
                                     <Trans i18nKey="home.hello" />
