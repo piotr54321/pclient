@@ -1,25 +1,25 @@
-import {useHistory} from "react-router-dom";
-import {Button}     from "bloomer";
-import React        from "react";
+import { useHistory } from "react-router-dom";
+import { Button }     from "bloomer";
+import React          from "react";
 
 function ButtonHistory(props) {
-    let history = useHistory();
+	let history = useHistory ();
 
-    function handleClick() {
-        if (props.back) {
-            //history.goBack();
-            history.push('/');
-        } else {
-            history.push(props.path);
-        }
-        window.scrollTo(0, 0)
-    }
+	function handleClick() {
+		if (props.back) {
+			//history.goBack();
+			history.push ('/');
+		} else {
+			history.push (props.path);
+		}
+		window.scrollTo (0, 0)
+	}
 
-    return (
-        <Button {...props} onClick={handleClick}>
-            {props.text}
-        </Button>
-    );
+	return (
+		<Button {...props} onClick={handleClick}>
+			{props.text}
+		</Button>
+	);
 }
 
 export default ButtonHistory;
