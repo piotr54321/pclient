@@ -1,4 +1,4 @@
-import { gql } from 'apollo-boost';
+import {gql} from 'apollo-boost';
 
 export const GET_PROJECTS = gql`
     query getProjects($id: Int, $limit: Int, $offset: Int){

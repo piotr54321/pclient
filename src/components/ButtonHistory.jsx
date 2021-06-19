@@ -1,15 +1,15 @@
 import {useHistory} from "react-router-dom";
-import {Button} from "bloomer";
-import React from "react";
+import {Button}     from "bloomer";
+import React        from "react";
 
 function ButtonHistory(props) {
     let history = useHistory();
 
     function handleClick() {
-        if(props.back){
+        if (props.back) {
             //history.goBack();
             history.push('/');
-        }else{
+        } else {
             history.push(props.path);
         }
         window.scrollTo(0, 0)
